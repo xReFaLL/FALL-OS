@@ -94,7 +94,7 @@ welcomeScreenOpen.addEventListener("click", function() {
 
 
 
-//
+//Opening window setup
 var selectedIcon = undefined;
 
 function selectIcon(element) {
@@ -141,5 +141,157 @@ fetch("./barca_content.html")
   .then(response => response.text())
   .then(html => {
     document.getElementById("barca_content_place").innerHTML = html;
+  });
+
+
+//Music app window setup
+dragElement(document.getElementById("window-music"));
+
+document.getElementById("musicclose").addEventListener("click", function() {
+  closeWindow(document.getElementById("window-music"));
+});
+
+var musicIcon = document.getElementById("music-app");
+musicIcon.addEventListener("click", function() {
+  handleIconTap(musicIcon);
+});
+
+  const songs = [
+  { title: "We Are One (Ole Ola)",   author: "Pitbull, Jennifer Lopez, Claudia Leitte",   cover: "./resonant/covers/we_are_one.png", audio: "./resonant/audios/we_are_one.mp3" },
+  { title: "Azizam", author: "Ed Sheeran", cover: "./resonant/covers/Azizam_Cover.jpg", audio: "./resonant/audios/Azizam_Single_Track_SpotiDost.mp3" },
+  { title: "Baby Doll", author: "Dominic Fike", cover: "./resonant/covers/Babydoll_Cover.jpg", audio: "./resonant/audios/Babydoll_Single_Track_SpotiDost.mp3" },
+  { title: "Bolide Noir", author: "Central Cee, JRK 19", cover: "./resonant/covers/Bolide_Noir_Cover.jpg", audio: "./resonant/audios/Bolide_Noir_Single_Track_SpotiDost.mp3" },
+  { title: "On The Floor", author: "Jennifer Lopez, Pitbull", cover: "./resonant/covers/On_The_Floor_Cover.jpg", audio: "./resonant/audios/On_The_Floor_Single_Track_SpotiDost.mp3" },
+  { title: "Phantom", author: "EsDeeKid, Rico Ace", cover: "./resonant/covers/Phantom_Cover.jpg", audio: "./resonant/audios/Phantom_Single_Track_SpotiDost.mp3" },
+  { title: "Rain Dance", author: "Dave, Tems", cover: "./resonant/covers/Raindance_feat._Tems_Cover.jpg", audio: "./resonant/audios/Raindance_feat._Tems_Single_Track_SpotiDost.mp3" },
+  { title: "They Don't Care About Us", author: "Michael Jackson", cover: "./resonant/covers/They_Dont_Care_About_Us_Cover.jpg", audio: "./resonant/audios/They_Dont_Care_About_Us_Single_Track_SpotiDost.mp3" },
+  { title: "WAGWAN", author: "Central Cee", cover: "./resonant/covers/WAGWAN_Cover.jpg", audio: "./resonant/audios/WAGWAN_Single_Track_SpotiDost.mp3" },
+  { title: "Welcome To The Black Parade", author: "My Chemical Romance", cover: "./resonant/covers/Welcome_to_the_Black_Parade_Cover.jpg", audio: "./resonant/audios/Welcome_to_the_Black_Parade_Single_Track_SpotiDost.mp3" },
+  { title: "Godzilla", author: "Eminem, Juice WRLD", cover: "./resonant/covers/Godzilla_feat._Juice_WRLD_Cover.jpg", audio: "./resonant/audios/Godzilla_feat._Juice_WRLD_Single_Track_SpotiDost.mp3" },
+  { title: "Malcom In The Middle", author: "Malcom Todd", cover: "./resonant/covers/Malcolm_In_The_Middle_Cover.jpg", audio: "./resonant/audios/Malcolm_In_The_Middle_Single_Track_SpotiDost.mp3" },
+  { title: "Let It Happen", author: "Tame Impala", cover: "./resonant/covers/Let_It_Happen_Cover.jpg", audio: "./resonant/audios/Let_It_Happen_Single_Track_SpotiDost.mp3" },
+  { title: "FE!N",   author: "Travis Scott, Playboi Carti",   cover: "./resonant/covers/FEIN_Cover.jpg", audio: "./resonant/audios/FEN_feat._Playboi_Carti_Single_Track_SpotiDost.mp3" },
+];
+
+fetch("./music.html")
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById("music_content_place").innerHTML = html;
+
+    const list        = document.getElementById("songlist");
+    const infoButton  = document.getElementById("info");
+    const panel       = document.getElementById("song-panel");
+    const audio       = document.getElementById("audio-player");
+    const cover       = document.getElementById("now-playing-cover");
+    const npTitle     = document.getElementById("now-playing-title");
+    const npAuthor    = document.getElementById("now-playing-author");
+    const playIcon    = document.getElementById("play-icon");
+    const playButton  = document.getElementById("stop_button");
+    const skipButton  = document.getElementById("skip_button");
+    const returnButton = document.getElementById("return_button");
+
+    let currentIndex = 0;
+
+    function applyDominantColor(imageSrc) {
+      const image = new Image();
+      image.crossOrigin = "anonymous";   
+      image.onload = function() {        
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+
+        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+        let r = 0, g = 0, b = 0, count = 0;
+        for (let i = 0; i < pixels.length; i += 4) {
+          r += pixels[i];
+          g += pixels[i + 1];
+          b += pixels[i + 2];
+          count++;
+        }
+        r = Math.floor(r / count);
+        g = Math.floor(g / count);
+        b = Math.floor(b / count);
+
+        const bgColor = `rgba(${r}, ${g}, ${b}, 0.4)`;
+          const buttonColor = `rgb(${r}, ${g}, ${b})`;
+          document.querySelector(".music-container").style.background = bgColor;
+          document.getElementById("stop_button").style.backgroundColor = buttonColor;
+      };
+
+      image.src = imageSrc;  
+    }
+
+function playSong(index) {
+      if (index < 0) index = songs.length - 1;
+      if (index >= songs.length) index = 0;
+      currentIndex = index;
+
+      const data = songs[index];
+      audio.src = data.audio;
+      audio.play();
+
+      cover.src = data.cover;
+      npTitle.textContent = data.title;
+      npAuthor.textContent = data.author;
+      playIcon.src = "./icons/pause.png";
+      applyDominantColor(data.cover);
+    }
+    
+    let listHTML = "";
+    for (let i = 0; i < songs.length; i++) {
+      const song = songs[i];
+      listHTML += `
+        <li class="song" data-index="${i}">
+          <img class="song-cover" src="${song.cover}">
+          <div class="song-text">
+            <span class="title">${song.title}</span>
+            <span class="authour">${song.author}</span>
+          </div>
+        </li>
+      `;
+    }
+    list.innerHTML = listHTML;
+
+   
+    infoButton.addEventListener("click", function() {
+      panel.style.display = (panel.style.display === "none") ? "block" : "none";
+    });
+
+    
+    list.addEventListener("click", function(event) {
+      const song = event.target.closest(".song");
+      if (!song) return;
+      const index = Number(song.dataset.index);
+      playSong(index);
+      panel.style.display = "none";
+    });
+
+   
+    playButton.addEventListener("click", function() {
+      if (!audio.src) {           
+        playSong(currentIndex);
+        return;
+      }
+      if (audio.paused) {         
+        audio.play();
+        playIcon.src = "./icons/pause.png";
+      } else {                    
+        audio.pause();
+        playIcon.src = "./icons/play.png";
+      }
+    });
+
+
+    skipButton.addEventListener("click", function()   { playSong(currentIndex + 1); });
+    returnButton.addEventListener("click", function() { playSong(currentIndex - 1); });
+
+
+    audio.addEventListener("ended", function() { playSong(currentIndex + 1); });
+  })
+  .catch(error => {
+    console.log("Error", error);
   });
 
