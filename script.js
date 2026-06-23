@@ -189,7 +189,10 @@ fetch("./music.html")
     const playButton  = document.getElementById("stop_button");
     const skipButton  = document.getElementById("skip_button");
     const returnButton = document.getElementById("return_button");
-
+    const progressBar  = document.getElementById("progress-bar");
+    const currentTime  = document.getElementById("current-time");
+    const totalTime    = document.getElementById("total-time");
+    
     let currentIndex = 0;
 
     function applyDominantColor(imageSrc) {
@@ -215,7 +218,7 @@ fetch("./music.html")
         g = Math.floor(g / count);
         b = Math.floor(b / count);
 
-        const bgColor = `rgba(${r}, ${g}, ${b}, 0.4)`;
+        const bgColor = `rgba(${r}, ${g}, ${b}, 0.35)`;
           const buttonColor = `rgb(${r}, ${g}, ${b})`;
           document.querySelector(".music-container").style.background = bgColor;
           document.getElementById("stop_button").style.backgroundColor = buttonColor;
@@ -289,9 +292,171 @@ function playSong(index) {
     returnButton.addEventListener("click", function() { playSong(currentIndex - 1); });
 
 
-    audio.addEventListener("ended", function() { playSong(currentIndex + 1); });
+audio.addEventListener("ended", function() { playSong(currentIndex + 1); });
+
+    const formatTime = function(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ":" + (sec < 10 ? "0" : "") + sec;
+    };
+
+    audio.addEventListener("timeupdate", function () {
+      if (!audio.duration) return;
+      progressBar.value = (audio.currentTime / audio.duration) * 100;
+      currentTime.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener("loadedmetadata", function () {
+      totalTime.textContent = formatTime(audio.duration);
+      progressBar.value = 0;
+    });
+
+    progressBar.addEventListener("input", function () {
+      audio.currentTime = (progressBar.value / 100) * audio.duration;
+    });
+
   })
   .catch(error => {
     console.log("Error", error);
   });
 
+
+
+  // Vela browser app
+dragElement(document.getElementById("window-browser"));
+
+document.getElementById("browserclose").addEventListener("click", function () {
+  closeWindow(document.getElementById("window-browser"));
+});
+
+var browserIcon = document.getElementById("browser-app");
+browserIcon.addEventListener("click", function () {
+  handleIconTap(browserIcon);
+});
+
+fetch("./browser.html")
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById("browser_content_place").innerHTML = html;
+
+    const urlInput = document.getElementById("browser-url-input");
+    const goBtn = document.getElementById("browser-go-btn");
+
+function openURL(raw) {
+  console.log("CLICK reçu, valeur:", raw);
+  var url = raw.trim();
+  if (!url) return;
+  if (url.startsWith("http://") || url.startsWith("https://") || url.match(/^[\w-]+\.[a-z]{2,}/)) {
+    if (!url.startsWith("http")) url = "https://" + url;
+    var w = window.open(url, "_blank");
+    console.log("window.open retourne:", w);
+  } else {
+    var w = window.open("https://www.google.com/search?q=" + encodeURIComponent(url), "_blank");
+    console.log("window.open retourne:", w);
+  }
+}
+
+goBtn.addEventListener("click", () => openURL(urlInput.value));
+urlInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") openURL(urlInput.value);
+});
+
+document.querySelectorAll(".bookmark").forEach(function(btn) {
+  btn.addEventListener("click", () => openURL(btn.dataset.url));
+});
+  });
+
+
+
+  // Notes app
+dragElement(document.getElementById("window-notes"));
+
+document.getElementById("notesclose").addEventListener("click", function () {
+  closeWindow(document.getElementById("window-notes"));
+});
+
+var notesIcon = document.getElementById("notes-app");
+notesIcon.addEventListener("click", function () {
+  handleIconTap(notesIcon);
+});
+
+fetch("./notes.html")
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById("notes_content_place").innerHTML = html;
+
+    const titleInput = document.getElementById("note-title-input");
+    const noteInput  = document.getElementById("note-input");
+    const saveBtn    = document.getElementById("note-save-btn");
+    const notesList  = document.getElementById("notes-list");
+
+    let notes = [];
+    try {
+      notes = JSON.parse(localStorage.getItem("velaNotes")) || [];
+    } catch (e) {
+      notes = [];
+    }
+
+    notes = notes.map(n => typeof n === "string"
+      ? { title: "No Title", content: n, date: "" }
+      : n);
+
+    function saveNotes() {
+      localStorage.setItem("velaNotes", JSON.stringify(notes));
+    }
+
+    
+    function escapeHTML(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function renderNotes() {
+      let listHTML = "";
+      for (let i = 0; i < notes.length; i++) {
+        const note = notes[i];
+        listHTML += `
+          <li class="note-item">
+            <div class="note-header">
+              <span class="note-title">${escapeHTML(note.title)}</span>
+              <span class="note-date">${escapeHTML(note.date)}</span>
+              <button class="note-delete" data-index="${i}">✕</button>
+            </div>
+            <span class="note-text">${escapeHTML(note.content)}</span>
+          </li>
+        `;
+      }
+      notesList.innerHTML = listHTML;
+    }
+
+    saveBtn.addEventListener("click", function () {
+      const title   = titleInput.value.trim();
+      const content = noteInput.value.trim();
+      if (!title && !content) return;
+
+      notes.push({
+        title: title || "Sans titre",
+        content: content,
+        date: new Date().toLocaleString()  
+      });
+
+      saveNotes();
+      renderNotes();
+      titleInput.value = "";
+      noteInput.value = "";
+    });
+
+    notesList.addEventListener("click", function (event) {
+      const btn = event.target.closest(".note-delete");
+      if (!btn) return;
+      const index = Number(btn.dataset.index);
+      notes.splice(index, 1);
+      saveNotes();
+      renderNotes();
+    });
+
+    renderNotes();
+  });

@@ -1,3 +1,13 @@
+.logo{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    cursor:pointer;
+    margin-top:6px;
+
+}
+
+
 .closebutton {
     margin-left:auto;
     width:16px ;
@@ -33,6 +43,40 @@
     top:120px;
     left:40px;
     height: 724px;
+    width:896px; 
+    border-radius:16px; 
+    background-color:rgba(61, 61, 61, 0.19); 
+    backdrop-filter:blur(14px);
+    position:fixed;
+    top:0; 
+    left:0;
+    z-index: 999;
+    
+}
+
+.window-welcome{
+    position:absolute; 
+    top:120px;
+    left:40px;
+    height: 724px;
+    width:724px; 
+    border-radius:16px; 
+    background-color:rgba(61, 61, 61, 0.19); 
+    backdrop-filter:blur(14px);
+    position:fixed;
+    top:0; 
+    left:0;
+    z-index: 999;
+    
+}
+
+
+
+.window-barca{
+    position:absolute; 
+    top:120px;
+    left:40px;
+    height: 724px;
     width:600px; 
     border-radius:16px; 
     background-color:rgba(61, 61, 61, 0.19); 
@@ -48,8 +92,24 @@
     position:absolute; 
     top:120px;
     left:40px;
-    height: 796px;
+    height: 900px;
     width:600px; 
+    border-radius:16px; 
+    background-color:rgba(61, 61, 61, 0.19); 
+    backdrop-filter:blur(14px);
+    position:fixed;
+    top:0; 
+    left:0;
+    z-index: 999;
+    
+}
+
+.window-browser{
+    position:absolute; 
+    top:120px;
+    left:40px;
+    height: 724px;
+    width:1024px; 
     border-radius:16px; 
     background-color:rgba(61, 61, 61, 0.19); 
     backdrop-filter:blur(14px);
@@ -70,6 +130,18 @@
     background-color:rgba(140, 140, 140, 0.315); 
     border-radius:16px 16px 0 0
 }
+
+.music-header{
+    display:flex; 
+    align-items:center; 
+    cursor:move; 
+    height:32px; 
+    width:100%; 
+    box-sizing:border-box;
+    background-color:rgba(140, 140, 140, 0.315); 
+    border-radius:16px 16px 0 0
+}
+
 
 
 .desktopApp{
@@ -117,7 +189,7 @@
 
 .music-container {
     width: 100%;
-    height: 100%;
+    height: 692;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -128,6 +200,8 @@
     border-radius:16px;
     backdrop-filter:blur(16px);
 }
+
+
 
 .music-player-bar {
     background:rgba(0,0,0,0.1);
@@ -296,4 +370,268 @@
 .now-playing-author {
   color: #999999;
   margin: 0;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 400px;
+  color: #999999;
+  font-size: 0.8rem;
+}
+
+#progress-bar {
+  flex: 1;
+  accent-color: #ffffff;
+  cursor: pointer;
+}
+
+.browser-container{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    margin-top: 64px;
+}
+
+.browser-player-bar {
+    background:rgba(0,0,0,0.1);
+    width:400px;
+    padding: 16px;
+    display:flex;
+    gap:16px;
+    border-radius:32px;
+    margin-bottom: 32px ;
+    
+}
+
+
+.bookmark {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.bookmark:hover {
+    background: rgba(255, 255, 255, 0.123);
+}
+
+
+.browser-bookmarks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 35%;
+}
+
+.browser-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 80%;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.266);
+    border-radius: 12px;
+    padding: 10px 16px;
+}
+
+.browser-search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.browser-search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.browser-search-bar button {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.198);
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+.browser-search-bar button:hover {
+    background: rgba(61, 64, 64, 0.5);
+}
+
+
+
+.vela-logo{
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+
+}
+
+.search-content{
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+}
+
+
+.bookmark-logo{
+    height:64px;
+    width:64px;
+}
+
+
+
+
+
+
+.window-notes {
+    height: 600px;
+    width: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: rgba(61, 61, 61, 0.19);
+    backdrop-filter: blur(14px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+}
+
+#notes_content_place {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 48px 24px 24px 24px;
+}
+
+.notes-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.note-title-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.266);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.note-title-input::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+.note-input {
+    width: 100%;
+    height: 96px;
+    box-sizing: border-box;
+    resize: none;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.266);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.note-input::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+.note-save-btn {
+    align-self: flex-end;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.note-save-btn:hover { background: rgba(255, 255, 255, 0.803); }
+
+.notes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.note-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.note-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.note-title {
+    flex: 1;
+    color: #ffffff;
+    font-weight: bold;
+    word-break: break-word;
+}
+
+.note-date {
+    color: #999999;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.note-text {
+    color: #e0e0e0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;  
+}
+
+.note-delete {
+    cursor: pointer;
+    background: #d6392b;
+    border: solid 1px rgba(0, 0, 0, 0.486);
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: #ffffff;
 }

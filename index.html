@@ -7,12 +7,10 @@
 <body style="margin:0">
   <img src="./backgrounds/background.gif" class="background">
   <div class="sidebar">
-    <div style="font-size:1.4rem;"><P style="cursor:cell" id="welcomeopen">Fall OS</P></div>
-    <div style="font-size:1.4rem;">🇲🇦</div>
-    <div><img src="./icons/logo_nobg.png" width="64px" height="64px"></div>
+    <div style="font-size:1.4rem;"><img src="./icons/FALLOS.png" class="logo" id="welcomeopen" ></div>
     <div><p id="clock" style="font-size:1.4rem">Time</p></div>
   </div> 
-  <div class="window" id="window">
+  <div class="window-welcome" id="window">
     <div class="header" id="welcomeheader">
       <p style="margin-left:16px; color: #ffffff; font-weight: 500">Hello!</p>
       <div class="closebutton" id="welcomeclose"></div>
@@ -21,10 +19,10 @@
     <h1>Welcome To <span style="color:#55c5f5; font-weight:bold;">FaLL OS</span></h1>
     <h2>Introduction</h2>
     <p>Fall OS is a WebOS created in the context of the StarDance event.<br>
-    While it is very bad, it still is better than nothing, I'd also like to share this quote with you guys:<br>
+    While it is very bad, it still is better than nothing, Here's a little quote for you guys:<br>
     <blockquote style="color:rgb(18, 231, 255); font-weight:bold;">"No matter how ridiculous the odds may seem, within us resides the power to overcome those challenges and achieve something beautiful and one day , we'll look back at where we started and be amazed by how far we've come" -Technoblade</blockquote></p>
     <div>
-      <img src="./icons/FALL_OS.png" style="width:296px; height:400px; border-radius:16px; object-fit:cover;">
+      <img src="./icons/FALLOS.png" style="width:296px; height:296px; border-radius:120px; object-fit:cover;">
     </div>
   </div>
   </div>
@@ -42,8 +40,21 @@
       <p style="margin:0px;align-items: center;" class="bold_font">Resonant</p>
     </div>
   </div>
+
+  <div class="desktopApp" id="browser-app" data-app="window-browser">
+    <div style="padding: 16px; filter: drop-shadow(0 0 8px rgb(0, 0, 0)); width:fit-content">
+      <img src="./icons/VELA.png" class="appIcons">
+      <p style="margin:0px;align-items: center;" class="bold_font">Vela</p>
+    </div>
+  </div>
+  <div class="desktopApp" id="notes-app" data-app="window-notes">
+  <div style="padding: 16px; filter: drop-shadow(0 0 8px rgb(0, 0, 0)); width:fit-content">
+    <img src="./icons/NOTES.png" class="appIcons">
+    <p style="margin:0px;align-items: center;" class="bold_font">Notes</p>
+  </div>
 </div>
-<div class="window" id="window-barca" style="display:none">
+</div>
+<div class="window-barca" id="window-barca" style="display:none">
   <div class="header" id="window-barcaheader">
     <p style="margin-left:16px; color: #ffffff; font-weight: 500">Barca's Anthem</p>
     <div class="closebutton" id="barcaclose"></div>
@@ -60,6 +71,20 @@
   
   <div style="padding-left:16px; color:#ffffff" id="music_content_place">
   </div>
+</div>
+<div class="window-browser" id="window-browser" style="display:none">
+  <div class="header" id="window-browserheader">
+    <p style="margin-left:16px; color: #ffffff; font-weight: 500">Vela - Web Browser</p>
+    <div class="closebutton" id="browserclose"></div>
+  </div>
+  <div id="browser_content_place"></div>
+</div>
+<div class="window-notes" id="window-notes" style="display:none">
+  <div class="header" id="window-notesheader">
+    <p style="margin-left:16px; color: #ffffff; font-weight: 500">Notes</p>
+    <div class="closebutton" id="notesclose"></div>
+  </div>
+  <div id="notes_content_place"></div>
 </div>
   <script src="./script.js" type="module">
   </script>
