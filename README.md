@@ -14,7 +14,9 @@ FaLL OS simulates a lightweight desktop environment in the browser: draggable wi
 - **Desktop icons** — click to select, click again to open the associated window
 - **Sidebar/taskbar** — live clock, OS branding, quick access to the welcome window
 - **Modular content loading** — window content can be split into separate files and injected at runtime, keeping the main HTML file lean
-- **Resonant — built-in music player** (see below)
+- **Resonant — built-in music player** 
+- **Notes — note taker app**
+- **Canvas - wallpaper selecter**
 
 ## Resonant (Music Player)
 
@@ -80,7 +82,7 @@ Paths must point to real files under `resonant/covers/` and `resonant/audios/` �
 
 ## Status
 
-Work in progress — built incrementally, prioritizing a working V1 over a fully polished release.
+Work in progress
 
 ## Credits
 
