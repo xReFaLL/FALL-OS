@@ -6,7 +6,6 @@ A browser-based WebOS interface built with vanilla HTML, CSS, and JavaScript —
 
 FaLL OS simulates a lightweight desktop environment in the browser: draggable windows, a taskbar/sidebar with a live clock, and clickable desktop app icons that open their own windows.
 
-> "No matter how ridiculous the odds may seem, within us resides the power to overcome those challenges and achieve something beautiful and one day, we'll look back at where we started and be amazed by how far we've come." — Technoblade
 
 ## Features
 
