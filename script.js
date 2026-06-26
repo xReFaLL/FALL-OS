@@ -460,3 +460,24 @@ fetch("./notes.html")
 
     renderNotes();
   });
+
+
+
+  // Wallpaper app setup
+dragElement(document.getElementById("window-wallpaper"));
+
+document.getElementById("wallpaperclose").addEventListener("click", function() {
+  closeWindow(document.getElementById("window-wallpaper"));
+});
+
+var wallpaperIcon = document.getElementById("wallpaper-app");
+wallpaperIcon.addEventListener("click", function() {
+  handleIconTap(wallpaperIcon);
+});
+
+var thumbs = document.querySelectorAll(".wallpaperThumb");
+thumbs.forEach(function(thumb) {
+  thumb.addEventListener("click", function() {
+    document.querySelector(".background").src = thumb.dataset.bg;
+  });
+});

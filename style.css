@@ -23,18 +23,18 @@
 .sidebar {
     display:flex;
     align-items:center;
-     box-sizing:border-box;
-      height:48px;
-       padding:16px; 
-       border-radius:16px; 
-       justify-content:space-between; 
-       backdrop-filter:blur(14px);
-        background-color:rgba(0, 234, 255, 0.275); 
-        color:#e0e0e0;
-        position:fixed; 
-        bottom:0;
-         left:0;
-     width:100%
+    box-sizing:border-box;
+    height:48px;
+    padding:16px; 
+    border-radius:16px; 
+    justify-content:space-between; 
+    backdrop-filter:blur(14px);
+    background-color:rgba(0, 0, 0, 0.145); 
+    color:#e0e0e0;
+    position:fixed; 
+    bottom:0;
+    left:0;
+    width:100%
 }
 
 
@@ -148,6 +148,9 @@
     cursor: pointer;
     text-align: center;
     width: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bold_font{
@@ -634,4 +637,17 @@
     height: 24px;
     flex-shrink: 0;
     color: #ffffff;
+}
+
+.wallpaperThumb{
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.wallpaperThumb:hover{
+    border: 2px solid #ffffff;
 }
