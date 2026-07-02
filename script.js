@@ -724,3 +724,127 @@ notes, wallpaper changer, and this terminal.</span>`,
 document.getElementById("sidebar-terminal").addEventListener("click", function() {
   handleIconTap(document.getElementById("terminal-app"));
 });
+
+
+
+// Clock app
+dragElement(document.getElementById("window-clock"));
+
+document.getElementById("clockclose").addEventListener("click", function() { killWindow(document.getElementById("window-clock")); });
+document.getElementById("clockhide").addEventListener("click", function() { hideWindow(document.getElementById("window-clock")); });
+document.getElementById("clockfullscreen").addEventListener("click", function() { toggleFullscreen(document.getElementById("window-clock")); });
+
+var clockIcon = document.getElementById("clock-app");
+clockIcon.addEventListener("click", function() { handleIconTap(clockIcon); });
+
+// World clocks
+function updateWorldClocks() {
+  var now = new Date();
+  var opts = {hour:"2-digit", minute:"2-digit", second:"2-digit"};
+  document.getElementById("time-casablanca").textContent = now.toLocaleTimeString("en-GB", {timeZone:"Africa/Casablanca", ...opts});
+  document.getElementById("time-paris").textContent = now.toLocaleTimeString("en-GB", {timeZone:"Europe/Paris", ...opts});
+  document.getElementById("time-newyork").textContent = now.toLocaleTimeString("en-GB", {timeZone:"America/New_York", ...opts});
+  document.getElementById("time-dubai").textContent = now.toLocaleTimeString("en-GB", {timeZone:"Asia/Dubai", ...opts});
+  document.getElementById("time-tokyo").textContent = now.toLocaleTimeString("en-GB", {timeZone:"Asia/Tokyo", ...opts});
+}
+setInterval(updateWorldClocks, 1000);
+updateWorldClocks();
+
+// Tab switching
+function showClockTab(tab) {
+  ["world","chrono","timer"].forEach(function(t) {
+    document.getElementById("panel-" + t).style.display = t === tab ? "flex" : "none";
+    document.getElementById("tab-" + t).classList.toggle("active", t === tab);
+  });
+}
+
+// Chrono
+var chronoRunning = false;
+var chronoStart = 0;
+var chronoElapsed = 0;
+var chronoInterval = null;
+
+function chronoToggle() {
+  if (chronoRunning) {
+    clearInterval(chronoInterval);
+    chronoElapsed += Date.now() - chronoStart;
+document.getElementById("chrono-label").src = "./icons/play.png";
+    chronoRunning = false;
+  } else {
+    chronoStart = Date.now();
+    chronoInterval = setInterval(function() {
+      var total = chronoElapsed + Date.now() - chronoStart;
+      var ms = total % 1000;
+      var s = Math.floor(total / 1000) % 60;
+      var m = Math.floor(total / 60000) % 60;
+      var h = Math.floor(total / 3600000);
+      document.getElementById("chrono-display").textContent =
+        String(h).padStart(2,"0") + ":" +
+        String(m).padStart(2,"0") + ":" +
+        String(s).padStart(2,"0") + "." +
+        String(ms).padStart(3,"0");
+    }, 50);
+  document.getElementById("chrono-label").src = "./icons/pause.png";
+    chronoRunning = true;
+  }
+}
+
+function chronoReset() {
+  clearInterval(chronoInterval);
+  chronoRunning = false;
+  chronoElapsed = 0;
+  document.getElementById("chrono-display").textContent = "00:00:00.000";
+  document.getElementById("chrono-label").src = "./icons/play.png";
+}
+
+// Timer
+var timerRunning = false;
+var timerRemaining = 0;
+var timerInterval = null;
+
+function timerToggle() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById("timer-label").src = "./icons/play.png";
+  } else {
+    if (timerRemaining === 0) {
+      var mins = parseInt(document.getElementById("timer-input").value);
+      if (!mins || mins < 1) return;
+      timerRemaining = mins * 60;
+    }
+    timerRunning = true;
+    document.getElementById("timer-label").src = "./icons/pause.png";
+    timerInterval = setInterval(function() {
+      timerRemaining--;
+      var m = Math.floor(timerRemaining / 60);
+      var s = timerRemaining % 60;
+      document.getElementById("timer-display").textContent =
+        String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+      if (timerRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById("timer-display").textContent = "DONE!";
+        document.getElementById("timer-label").src = "./icons/play.png";
+      }
+    }, 1000);
+  }
+}
+
+function timerReset() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerRemaining = 0;
+  document.getElementById("timer-display").textContent = "00:00";
+  document.getElementById("timer-label").src = "./icons/play.png";
+  document.getElementById("timer-input").value = "";
+}
+
+
+document.getElementById("tab-world").addEventListener("click", function() { showClockTab("world"); });
+document.getElementById("tab-chrono").addEventListener("click", function() { showClockTab("chrono"); });
+document.getElementById("tab-timer").addEventListener("click", function() { showClockTab("timer"); });
+document.getElementById("chrono-start").addEventListener("click", chronoToggle);
+document.getElementById("chrono-reset").addEventListener("click", chronoReset);
+document.getElementById("timer-start").addEventListener("click", timerToggle);
+document.getElementById("timer-reset").addEventListener("click", timerReset);

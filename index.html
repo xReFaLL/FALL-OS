@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>FaLL OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
 </head>
 <body style="margin:0">
   <img src="./backgrounds/background.gif" class="background">
@@ -86,6 +88,12 @@
     <p style="margin:0px;align-items: center;" class="bold_font">Terminal</p>
   </div>
 </div>
+<div class="desktopApp" id="clock-app" data-app="window-clock">
+  <div style="padding: 16px; filter: drop-shadow(0 0 8px rgb(0, 0, 0)); width:fit-content">
+    <img src="./icons/Clock.png" class="appIcons">
+    <p style="margin:0px;align-items: center;" class="bold_font">Clock</p>
+  </div>
+</div>
 </div>
 <div class="window-barca" id="window-barca" style="display:none">
   <div class="header" id="window-barcaheader">
@@ -167,6 +175,73 @@
     </div>
   </div>
   <div id="terminal_content_place" style="flex:1; overflow:hidden; display:flex; flex-direction:column;"></div>
+</div>
+<div class="window-clock" id="window-clock" style="display:none">
+  <div class="header" id="window-clockheader">
+    <p style="margin-left:16px; color:#ffffff; font-weight:500">Clock</p>
+    <div class="window-buttons">
+      <div class="hidebutton" id="clockhide"><img class="btn-hover" src="./icons/minus.png"></div>
+      <div class="fullscreenbutton" id="clockfullscreen"><img class="btn-hover" src="./icons/fullscreen.png"></div>
+      <div class="killbutton" id="clockclose"><img class="btn-hover" src="./icons/cross.png"></div>
+    </div>
+  </div>
+  <div class="clock-container">
+    <div class="clock-tabs">
+      <button class="clock-tab active" id="tab-world">World Clock</button>
+      <button class="clock-tab" id="tab-chrono">Chronometer</button>
+      <button class="clock-tab" id="tab-timer">Timer</button>
+    </div>
+
+    <div class="clock-panel" id="panel-world">
+      <div class="world-clocks">
+        <div class="Casa-world-clock-item">
+          <span class="world-city">Casablanca</span>
+          <span class="world-time" id="time-casablanca"></span>
+        </div>
+        <div class="Paris-world-clock-item">
+          <span class="world-city">Paris</span>
+          <span class="world-time" id="time-paris"></span>
+        </div>
+        <div class="NYC-world-clock-item">
+          <span class="world-city">New York</span>
+          <span class="world-time" id="time-newyork"></span>
+        </div>
+        <div class="Dubai-world-clock-item">
+          <span class="world-city">Dubai</span>
+          <span class="world-time" id="time-dubai"></span>
+        </div>
+        <div class="Tokyo-world-clock-item">
+          <span class="world-city">Tokyo</span>
+          <span class="world-time" id="time-tokyo"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="clock-panel" id="panel-chrono" style="display:none">
+      <div class="chrono-display" id="chrono-display">00:00:00.000</div>
+      <div style="display:flex; gap:16px; justify-content:center; margin-top:24px;">
+        <button class="mainclockbutton" id="chrono-start">
+          <img class="mainbuttonContent" id="chrono-label" src="./icons/play.png">
+        </button>
+        <button class="clockregularbutton" id="chrono-reset">
+          <img src="./icons/reset-icon.png" class="mainclockbuttonContent">
+        </button>
+      </div>
+    </div>
+
+    <div class="clock-panel" id="panel-timer" style="display:none">
+      <div class="chrono-display" id="timer-display">00:00</div>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:16px; align-items:center;">
+        <input type="number" id="timer-input" min="1" max="999" placeholder="min" style="width:80px; padding:8px; border-radius:12px; border:none; background:rgba(0,0,0,0.3); color:#fff; font-size:1.2rem; text-align:center; outline:none;">
+        <button class="mainclockbutton" id="timer-start">
+          <img class="mainbuttonContent" id="timer-label" src="./icons/play.png">
+        </button>
+        <button class="clockregularbutton" id="timer-reset">
+          <img src="./icons/reset-icon.png" class="mainclockbuttonContent" >
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
   <script src="./script.js" type="module"></script>
   <link rel="stylesheet" type="text/css" href="style.css">

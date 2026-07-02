@@ -1,3 +1,8 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+
 .logo{
     width:42px;
     height:42px;
@@ -198,8 +203,8 @@
     left: 0;
     z-index: 1;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    gap: 32px;
     padding: 32px;
 }
 
@@ -236,9 +241,23 @@
     margin:auto;
     height: 48px;
     cursor: pointer;
-    background-color: #ffffff; 
+    background-color: #ffffff84; 
     border-radius: 16px; 
-    border: solid 1px rgba(0, 0, 0, 0.428); 
+    border: solid 1px rgba(255, 255, 255, 0.092); 
+}
+
+.clockregularbutton {
+    width:48px ;
+    margin:auto;
+    height: 48px;
+    cursor: pointer;
+    background-color: #ffffff84; 
+    border-radius: 16px; 
+    border: solid 1px rgba(255, 255, 255, 0.092); 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mainbutton {
@@ -246,9 +265,22 @@
     margin:auto;
     height: 96px;
     cursor: pointer;
-    background-color: #01bd19; 
+    background-color: #01bd1abc; 
     border-radius: 32px; 
-    border: solid 1px rgba(0, 0, 0, 0.428); 
+    border: solid 1px rgba(0, 0, 0, 0.119); 
+}
+
+.mainclockbutton {
+    width:96px ;
+    margin:auto;
+    height: 96px;
+    cursor: pointer;
+    background-color: #ffffff3a; 
+    border-radius: 32px; 
+    border: solid 1px rgba(0, 0, 0, 0.062); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -268,12 +300,30 @@
     
 }
 
+.minibuttonContent {
+    width:32px;
+    height:32px;
+    display:grid;
+    place-items:center;
+    
+}
+
 .mainbuttonContent {
     width: 96px;
     height: 96px;
     display: grid;
     place-items: center;
 }
+
+
+.mainclockbuttonContent {
+    width: 96px;
+    height: 96px;
+    display: grid;
+    position: absolute;
+    object-fit: contain;
+}
+
 
 .bar {
     display:flex;
@@ -752,7 +802,7 @@
 }
 
 
-.window, .window-welcome, .window-barca, .window-resonant, .window-browser, .window-notes, .window-terminal{
+.window, .window-welcome, .window-barca, .window-resonant, .window-browser, .window-notes, .window-terminal, .window-clock{ 
     transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease, border-radius 0.3s ease, opacity 0.3s ease;
 }
 
@@ -857,3 +907,130 @@
 .terminal-cyan   { color: #007b99; }
 .terminal-white  { color: #ffffff; }
 .terminal-yellow { color: #ecd100; }
+
+
+
+.window-clock {
+    height: 480px;
+    width: 480px;
+    border-radius: 16px;
+    background-color: rgba(61, 61, 61, 0.19);
+    backdrop-filter: blur(14px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.clock-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.clock-tab {
+    flex: 1;
+    padding: 8px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(0,0,0,0.2);
+    color: #999999;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.clock-tab.active {
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.clock-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.world-clocks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Casa-world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(36, 234, 10, 0.2);
+    border-radius: 12px;
+    padding: 12px
+}
+.Paris-world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(4, 107, 224, 0.2);
+    border-radius: 12px;
+    padding: 12px
+}
+.NYC-world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(202, 104, 13, 0.2);
+    border-radius: 12px;
+    padding: 12px
+}
+.Dubai-world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(190, 193, 18, 0.2);
+    border-radius: 12px;
+    padding: 12px
+}
+.Tokyo-world-clock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(138, 25, 119, 0.2);
+    border-radius: 12px;
+    padding: 12px
+}
+
+
+
+.world-city {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.world-time {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.chrono-display {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
